@@ -5,6 +5,8 @@ other_authors/*.R
 other_authors/*.py
 !other_authors/__init__.py
 output/plots/*.png
+!output/plots/linelist_counts_country.png
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
