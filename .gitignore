@@ -1,12 +1,20 @@
 .idea/
 .DS_store
-#data/*.feather
+
+data/*.feather
+!data/df.feather
+!data/combined_dat.feather
+
 other_authors/*.R
 other_authors/*.py
 !other_authors/__init__.py
+
 output/plots/*.png
 !output/plots/linelist_counts_country.png
 
+notebooks/template.ipynb
+
+tmp*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

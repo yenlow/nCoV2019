@@ -7,7 +7,12 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from github import Github
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
 
 class gspread_obj(object):
     """
@@ -123,4 +128,3 @@ class gh_obj(object):
         f = open(outpath, "wb")
         f.write(contents.decoded_content)
         f.close()
-

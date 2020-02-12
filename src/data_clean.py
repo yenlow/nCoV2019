@@ -77,7 +77,7 @@ for c in col_cat:
 # Recode into fewer, more meaningful categories
 df.sequence_available = recode(df.sequence_available,
                                 { "yes": 1}
-                                , inplace=False, missing=0)
+                                , inplace=False, missing=0).astype('int')
 
 df.reported_market_exposure = recode(df.reported_market_exposure,
                                     {   "yes": 1,
@@ -86,7 +86,7 @@ df.reported_market_exposure = recode(df.reported_market_exposure,
                                         "working in another market in Wuhan" : 1,
                                         '18.01.2020 - 23.01.2020': 1,
                                         '18.01.2020 - 23.01.2019': 1}
-                        , inplace=False, missing=None)
+                        , inplace=False, missing=0).astype('int')
 
 df.outcome = recode(df.outcome,
                     { "died": 'died',
@@ -102,32 +102,42 @@ for c in col_cat:
 
 # Recode to new variables
 df['wuhan'] = 1-df['wuhan(0)_not_wuhan(1)'].astype('int')
-df.drop(columns='wuhan(0)_not_wuhan(1)')
+#df.drop(columns='wuhan(0)_not_wuhan(1)')
 df['died'] = recode(df.outcome,
                     { "died": 1}
                     , inplace=False, missing = 0).astype('int')
 df['male'] = recode(df.sex, {"female": 0, "male": 1}, inplace=False, missing=np.nan).astype('float')
 df['china'] = recode(df.country, {"China": 1}, inplace=False, missing=0).astype('int')
+df['e_asia'] = recode(df.country,
+                    {"China": 1,
+                     "Japan": 1,
+                     "Singapore": 1,
+                     "Thailand": 1,
+                     "South Korea": 1,
+                     "Malaysia": 1,
+                     "Vietnam": 1,
+                     "Taiwan": 1,
+                     "Philippines": 1},
+                    inplace=False, missing=0).astype('int')
 
 # Check for missingness and whether appropriate as features
-df.age.value_counts(dropna=False)    #95% missing
-df.male.value_counts(dropna=False)   #95% missing
-df.wuhan.value_counts(dropna=False)
-df.china.value_counts(dropna=False)
-df.chronic_disease_binary.value_counts(dropna=False)
-df.died.value_counts(dropna=False)   #0.3%
+print(df.age.value_counts(dropna=False).sort_index())    #95% missing
+print(df.male.value_counts(dropna=False).sort_index())   #95% missing
+print(df.wuhan.value_counts(dropna=False).sort_index())
+print(df.china.value_counts(dropna=False).sort_index())
+print(df.e_asia.value_counts(dropna=False).sort_index())
+print(df.chronic_disease_binary.value_counts(dropna=False).sort_index())
+print(df.died.value_counts(dropna=False).sort_index())   #0.3%
 
-# mortality rate
+# mortality rate (0.28%)
 df['died'].sum()/df.shape[0]*100
-
-
 
 # Calculate features from dates
 print(col_date)
-df['days_onset_outcome'] = (df['date_death_or_discharge'] - df['date_onset_symptoms']).astype('timedelta64[D]')
-df['days_onset_confirm'] = (df['date_confirmation'] - df['date_onset_symptoms']).astype('timedelta64[D]')
-df['days_hosp'] = (df['date_death_or_discharge'] - df['date_admission_hospital']).astype('timedelta64[D]')
-df['days_admin_confirm'] = (df['date_confirmation'] - df['date_admission_hospital']).astype('timedelta64[D]')
+df['days_onset_outcome']= pd.to_timedelta(df['date_death_or_discharge'] - df['date_onset_symptoms']) / np.timedelta64(1, 'D')
+df['days_onset_confirm'] = (df['date_confirmation'] - df['date_onset_symptoms']) / np.timedelta64(1, 'D')
+df['days_hosp'] = (df['date_death_or_discharge'] - df['date_admission_hospital']) / np.timedelta64(1, 'D')
+df['days_admin_confirm'] = (df['date_confirmation'] - df['date_admission_hospital']) / np.timedelta64(1, 'D')
 
 col_days = list(filter(lambda x:'days' in x, df.columns))
 for c in col_days:
@@ -135,22 +145,34 @@ for c in col_days:
     plt.show()
 
 # write cleaned up  df
-df.dtypes
+print(df.dtypes)
 write_dataframe(df, 'data/df.feather')
 
 # construct subset with complete rows
-df[df.age.notna()]['male'].value_counts(dropna=False)
-df[df.male.notna()]['age'].value_counts(dropna=False)
+print(df[df.age.notna()]['male'].value_counts(dropna=False))
+print(df[df.male.notna()]['age'].value_counts(dropna=False))
 df_complete_subset = df[(df.age.notna()) & (df.male.notna())]
-print(df_complete_subset.shape)      #766 rows
-df_complete_subset.age.value_counts(dropna=False).sort_index()
-df_complete_subset.male.value_counts(dropna=False).sort_index()
+print(df_complete_subset.shape)      #740 rows
+print(df_complete_subset.age.value_counts(dropna=False).sort_index())
+print(df_complete_subset.male.value_counts(dropna=False).sort_index())
 
 write_dataframe(df_complete_subset, 'data/df_complete_subset.feather')
 
-#impute missing values
+# imputation
+df_imputed = df.copy()
+
+# Manually impute (faster than sklearn.impute - unstable API)
+# median imputation for age
 df.age.median()   #48 yrs old
-df_imputed = df
 df_imputed.age = df.age.fillna(50,inplace=False)
+print(df_imputed.age.value_counts(dropna=False).sort_index())
+
+
+
+# impute missing gender
+male_fraction = df.male.value_counts()[1.0]/df.male.value_counts().sum()            #0.56
+df_imputed.male.loc[df.male.isna()] = np.random.choice([0,1], p=[1-male_fraction, male_fraction], size=df.male.isna().sum())
+print(df_imputed.male.value_counts(dropna=False).sort_index())
+print(df_imputed.male.value_counts()[1.0]/df_imputed.male.value_counts().sum())     #0.55
 
 write_dataframe(df_imputed, 'data/df_imputed.feather')
