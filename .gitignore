@@ -1,7 +1,7 @@
 .idea/
 .DS_store
 
-data/*.feather
+data/
 !data/df.feather
 !data/combined_dat.feather
 
