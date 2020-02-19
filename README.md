@@ -1,6 +1,13 @@
 # About
-Many scientists have come together to share their data, code and ideas openly and timely to fight the COVID-19 epidemic. 
+Many scientists have come together to share their data, code and ideas openly and timely to fight the COVID-19 epidemic ([news link](https://qz.com/1795103/coronavirus-is-a-proving-ground-for-scientific-transparency/), [free Alibaba cloud services](https://blog.deeplearning.ai/blog/the-batch-hotter-dating-profiles-pandas-in-love-compute-for-coronavirus-deepfake-detection-self-driving-cars-run-amok))
 Here I've gathered and incorporated snippets from several publications and repos (see [Acknowledgments](https://github.com/yenlow/nCoV2019/wiki/Acknowledgements)) and also experimented with methods inspired by their work or other related fields (e.g. Social Network Analysis, gene expression networks, compartmental modeling).
+
+# Join our Workgroup
+We are based in SF Bay but collaborate remotely to solve this public health crisis. We come from diverse backgrounds ranging from Epidemiology, Public Health, Cheminformatics, Astrophysics, Mechanical Engineering.
+- **Github:** https://github.com/yenlow/nCoV2019
+- **Slack channel:** [coronavirus2020.slack.com](https://app.slack.com/client/TT3PHCRFG/CSRBY0Y9X)
+- **[Google shared drive](https://drive.google.com/drive/folders/1K8UVAS1KKkukU-WlcUYVeeI7DsXXoGU_?usp=sharing)** 
+
 
 # What this repo does (so far)
 1. Downloads line lists from [Google spreadsheet](https://docs.google.com/spreadsheets/d/1itaohdPiAeniCXNlntNztZ_oRvjh0HsGuJXUJWET008/edit#gid=0)
@@ -22,11 +29,15 @@ Today, we have even more data and methods available. This [figure](http://doi.or
 ## What scientists know so far:
 1. **Reproductive number** (*R0*)**:** 2.2 [95% CI: 1.4 - 3.9] (Li et al. *NEJM* [doi:10.1056/NEJMoa2001316](https://www.nejm.org/doi/full/10.1056/NEJMoa2001316))
 2. **Incubation period:** mean 5 days [95% CI: 4 - 7 days], 95% percentile: 12.5 days, max(rare!): 21 days (Li et al. *NEJM* [doi:10.1056/NEJMoa2001316](https://www.nejm.org/doi/full/10.1056/NEJMoa2001316))
-3. **Mortality rate:**
+3. **Mortality rate:** [1.2-5.6% outside Hubei; 18% inside Hubei](https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-2019-nCoV-severity-10-02-2020.pdf)
 4. **Recovery rate:**
+5. **SIR compartmental modeling** ([blog](https://towardsdatascience.com/modelling-the-coronavirus-epidemic-spreading-in-a-city-with-python-babd14d82fa2))
+6. **Prediction from flight traffic:** [earliest forecast by Imperial College](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/news--wuhan-coronavirus/), 
+7. **Prediction from Chinese flight and mobile phone use:** [Wu et. al. Lancet 2020, https://doi.org/10.1016/S0140-6736(20)30260-9](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30260-9/fulltext)
 
 ## Data and code suggestions
 If you chance upon good papers and code for corroborating data and methods, pls suggest so in [Issues](https://github.com/yenlow/nCoV2019/issues/new) or [Wiki](https://github.com/yenlow/nCoV2019/wiki/Home)
 - Social media data
 - Traffic patterns
 - Health utilization data
+- Simulation under various scenarios
