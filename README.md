@@ -1,3 +1,9 @@
+# Latest Updates:
+See risk factors analyzed from one of the largest studies, OpenSafely, studying 17 million UK adults
+```
+Williamson, E.J., Walker, A.J., Bhaskaran, K. et al. Factors associated with COVID-19-related death using OpenSAFELY. Nature (2020). https://doi.org/10.1038/s41586-020-2521-4
+```
+
 # About
 Many scientists have come together to share their data, code and ideas openly and timely to fight the COVID-19 epidemic ([news link](https://qz.com/1795103/coronavirus-is-a-proving-ground-for-scientific-transparency/), [free Alibaba cloud services](https://blog.deeplearning.ai/blog/the-batch-hotter-dating-profiles-pandas-in-love-compute-for-coronavirus-deepfake-detection-self-driving-cars-run-amok))
 Here I've gathered and incorporated snippets from several publications and repos (see [Acknowledgments](https://github.com/yenlow/nCoV2019/wiki/Acknowledgements)) and also experimented with methods inspired by their work or other related fields (e.g. Social Network Analysis, gene expression networks, compartmental modeling).
