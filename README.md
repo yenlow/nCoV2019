@@ -1,7 +1,9 @@
 # Latest Updates:
 See risk factors analyzed from one of the largest studies, OpenSafely, studying 17 million UK adults
 ```
-Williamson, E.J., Walker, A.J., Bhaskaran, K. et al. Factors associated with COVID-19-related death using OpenSAFELY. Nature (2020). https://doi.org/10.1038/s41586-020-2521-4
+Williamson, E.J., Walker, A.J., Bhaskaran, K. et al. 
+Factors associated with COVID-19-related death using OpenSAFELY. 
+Nature (2020). https://doi.org/10.1038/s41586-020-2521-4
 ```
 
 # About
