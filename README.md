@@ -5,6 +5,7 @@ Williamson, E.J., Walker, A.J., Bhaskaran, K. et al.
 Factors associated with COVID-19-related death using OpenSAFELY. 
 Nature (2020). https://doi.org/10.1038/s41586-020-2521-4
 ```
+[Reported risk factors](https://www.nature.com/articles/s41586-020-2521-4/tables/2) (age, male, chronic illness) agree with our initial analysis. Additional risk factors were obesity, being non-White and specific chronic conditions (e.g. immunosuppression, neurological, diabetes, prior transplant)
 
 # About
 Many scientists have come together to share their data, code and ideas openly and timely to fight the COVID-19 epidemic ([news link](https://qz.com/1795103/coronavirus-is-a-proving-ground-for-scientific-transparency/), [free Alibaba cloud services](https://blog.deeplearning.ai/blog/the-batch-hotter-dating-profiles-pandas-in-love-compute-for-coronavirus-deepfake-detection-self-driving-cars-run-amok))
